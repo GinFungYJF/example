@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="COMM.BUILD" default="jar" basedir=".">
+	
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="dest.dir" value="${basedir}/dest"/>
+	<property name="process.name" value="comm"/>  
+	<property name="process.dir" value="${dest.dir}/${process.name}"/>
+	<property name="process.tmp" value="${process.dir}/tmp"/>  
+	<property name="process.bin" value="${process.dir}/bin"/>
+	<property name="process.jar" value="comm.jar"/>  
+        
+	<target name="clean">
+                <delete dir="${process.dir}" />
+        </target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${process.dir}" />
+                <mkdir dir="${process.bin}" />
+                <mkdir dir="${process.tmp}" />
+	</target>
+
+	<target name="jar" depends="init">
+		<javac srcdir="${src.dir}" destdir="${process.tmp}" debug="true" debuglevel="source,lines,vars">
+			<compilerarg line="-encoding UTF-8 " />
+		</javac>
+
+		<jar destfile="${process.bin}/${process.jar}" basedir="${process.tmp}" manifestencoding="utf-8">
+		</jar>
+	</target>
+
+</project>
